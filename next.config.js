@@ -1,9 +1,11 @@
 const isProd = process.env.NODE_ENV === "production";
+// next.config.js
+//const withPlugins = require("next-compose-plugins");
+//const optimizedImages = require("next-optimized-images");
+
 module.exports = {
-  reactStrictMode: true,
-  /**
-   * Tell Next.js where the `public` folder is.
-   * Replace `nextjs-github-pages` with your Github repo project name.
-   */
-  assetPrefix: isProd ? "/data-start/" : "",
+  images: {
+    loader: "akamai",
+    path: "",
+  },
 };
