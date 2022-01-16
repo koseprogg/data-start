@@ -1,5 +1,4 @@
 import Head from "next/head";
-import Image from "next/image";
 import Link from "next/link";
 import styles from "../styles/Home.module.css";
 
@@ -126,7 +125,7 @@ export default function Home() {
           >
             <h2>
               <span className={styles.image}>
-                <Image
+                <img
                   src="/abakus.png"
                   alt="Abakus Logo"
                   height={25}
@@ -143,7 +142,7 @@ export default function Home() {
           >
             <h2>
               <span className={styles.image}>
-                <Image
+                <img
                   src="/online.svg"
                   alt="Online Logo"
                   height={25}
@@ -160,7 +159,7 @@ export default function Home() {
           >
             <h2>
               <span className={styles.image}>
-                <Image
+                <img
                   src="/tihlde.png"
                   alt="Tihlde Logo"
                   height={25}
@@ -181,7 +180,7 @@ export default function Home() {
         >
           Foreslå endringer på{" "}
           <span className={styles.logo}>
-            <Image src="/github.svg" alt="Github Logo" width={16} height={16} />{" "}
+            <img src="/github.svg" alt="Github Logo" width={16} height={16} />{" "}
           </span>
         </a>
       </footer>
