@@ -1,11 +1,10 @@
-const isProd = process.env.NODE_ENV === "production";
-// next.config.js
-//const withPlugins = require("next-compose-plugins");
-//const optimizedImages = require("next-optimized-images");
+const basePath = process.env.NODE_ENV === "production" ? "/repo" : "";
 
 module.exports = {
   images: {
     loader: "akamai",
     path: "",
   },
+  basePath,
+  assetPrefix: `${basePath}/`,
 };
