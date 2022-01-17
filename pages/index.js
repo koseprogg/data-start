@@ -114,7 +114,7 @@ export default function Home() {
           </a>
 
           <a
-            href="https://fsweb.no/studentweb/login.jsf?inst=FSNTNU"
+            href="https://app.vitnemalsportalen.no/vp/login"
             className={`${styles.card} ${styles.vitnemal}`}
           >
             <h2>Vitnemålsportalen</h2>
