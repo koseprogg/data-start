@@ -1,4 +1,4 @@
-const basePath = process.env.NODE_ENV === "production" ? "/repo" : "";
+const basePath = process.env.NODE_ENV === "production" ? "/data-start" : "";
 
 module.exports = {
   images: {
