@@ -133,6 +133,7 @@ function generateDefaultConfig() {
 }
 
 export default function Home() {
+  const [darkMode, setDarkMode] = useState(false);
   const [activeLinks, setActiveLinks] = useState([]);
 
   function closeLink(index) {
@@ -158,6 +159,7 @@ export default function Home() {
 
   useEffect(() => {
     localStorage.setItem("activeLinks", JSON.stringify(activeLinks));
+    setDarkMode(window.matchMedia("(prefers-color-scheme: dark)").matches);
   }, [activeLinks]);
 
   return (
@@ -171,14 +173,26 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={styles.main}>
+      <main
+        className={styles.main}
+        style={darkMode ? { backgroundColor: "#121212" } : {}}
+      >
         <button
           className={styles.button}
           onClick={(e) => {
             reset();
           }}
         >
-          <span className={styles.image}>
+          <span
+            className={styles.image}
+            style={
+              darkMode
+                ? {
+                    filter: "brightness(0) invert(1)",
+                  }
+                : {}
+            }
+          >
             <Image
               src={"./replay.svg"}
               alt="Tilbakestill"
@@ -192,6 +206,7 @@ export default function Home() {
             activeLinks[key] ? (
               <LinkCard
                 key={key}
+                darkMode={darkMode}
                 {...metadata}
                 onClose={() => closeLink(key)}
               />
@@ -202,7 +217,14 @@ export default function Home() {
         </div>
       </main>
 
-      <footer className={styles.footer}>
+      <footer
+        className={styles.footer}
+        style={
+          darkMode
+            ? { borderTop: "1px solid #363636", backgroundColor: "#888999" }
+            : {}
+        }
+      >
         <a
           href="https://github.com/Magssch/data-start"
           target="_blank"

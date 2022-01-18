@@ -9,12 +9,21 @@ const LinkCard = ({
   url,
   internal = false,
   closeColor = "black",
+  darkMode,
   onClose,
 }) => {
+  const styleContent = {};
+  if (darkMode) {
+    styleContent = { boxShadow: "none", border: "1px solid white" };
+    if (!className) {
+      styleContent = { ...styleContent, color: "#FFFFFF" };
+    }
+  }
   const content = (
     <div
       onClick={() => (window.location.href = url)}
       className={`${styles.card} ${className}`}
+      style={styleContent}
     >
       <h2>{name}</h2>
       <p>{description}</p>
