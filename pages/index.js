@@ -5,7 +5,7 @@ import online_logo from "../public/online.svg";
 import abakus_logo from "../public/abakus.png";
 import tihlde_logo from "../public/tihlde.png";
 import github_logo from "../public/github.svg";
-import Image from "next/image";
+import Image from "../components/Image";
 
 export default function Home() {
   return (
