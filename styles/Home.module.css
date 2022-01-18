@@ -86,6 +86,42 @@
   min-height: 250px;
   box-shadow: 1px 1px 5px #888888;
   transition: box-shadow 0.3s;
+  position: relative;
+  cursor: pointer;
+}
+
+.card button, .button {
+  background: transparent;
+  border: none;
+  position: absolute;
+  right: 0;
+  top: 4rem;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transform: translate(-50%, -50%) scale(1);
+  transition: transform 0.5s;
+}
+
+.card button {
+  display: none;
+  bottom: 0;
+  top: unset;
+  transition: transform 0.1s;
+}
+
+
+.card:hover button {
+  display: unset;
+}
+
+.card button:hover {
+  transform: translate(-50%, -50%) scale(1.25);
+  transition: transform 0.1s;
+}
+
+.button:hover {
+  transform: translate(-50%, -50%) rotate(-120deg) scale(1.25);
+  transition: transform 0.5s;
 }
 
 .bb {
