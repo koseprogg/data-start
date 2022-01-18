@@ -6,5 +6,5 @@ module.exports = {
     path: "",
   },
   basePath,
-  assetPrefix: `${basePath}/`,
+  //  assetPrefix: `${basePath}/`,
 };
