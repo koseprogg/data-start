@@ -190,8 +190,7 @@
 }
 
 @media (prefers-color-scheme: dark) {
-
-  .card {
+  .card, .card:hover {
     box-shadow: none;
     border: 1px solid white;
   }

@@ -23,7 +23,11 @@ const LinkCard = ({
   }
   const content = (
     <div
-      onClick={() => (window.location.href = url)}
+      onClick={() => {
+        if (!internal) {
+          window.location.href = url;
+        }
+      }}
       onTouchStart={() => {
         setMoved(false);
         setTouched(true);
@@ -31,7 +35,7 @@ const LinkCard = ({
       onTouchMove={() => setMoved(true)}
       onTouchEnd={(e) => {
         e.preventDefault();
-        if (!moved) {
+        if (!moved && !internal) {
           window.location.href = url;
         }
         setTouched(false);
