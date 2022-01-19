@@ -8,7 +8,7 @@ const LinkCard = ({
   description,
   url,
   internal = false,
-  closeColor = "black",
+  closeColor,
   darkMode,
   onClose,
 }) => {
@@ -32,7 +32,7 @@ const LinkCard = ({
           e.stopPropagation();
           onClose();
         }}
-        style={{ color: closeColor }}
+        style={{ color: closeColor ?? (darkMode ? "white" : "black") }}
       >
         &#x2715;
       </button>

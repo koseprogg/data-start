@@ -19,8 +19,20 @@
   border-top: 1px solid #eaeaea;
   justify-content: center;
   align-items: center;
+  position: unset;
 }
 
+@media (prefers-color-scheme: dark) {
+  .footer {
+    border-top: 1px solid #ffffff;
+    background-color: #222222;
+    color: white;
+  }
+
+  .footer img {
+    filter: brightness(0) invert(1);
+  }
+}
 .footer a {
   display: flex;
   justify-content: center;
@@ -93,9 +105,6 @@
 .card button, .button {
   background: transparent;
   border: none;
-  position: absolute;
-  right: 0;
-  top: 4rem;
   font-size: 1.2rem;
   cursor: pointer;
   transform: translate(-50%, -50%) scale(1);
@@ -104,11 +113,12 @@
 
 .card button {
   display: none;
+  position: absolute;
+  right: 0;
   bottom: 0;
   top: unset;
   transition: transform 0.1s;
 }
-
 
 .card:hover button {
   display: unset;
@@ -122,6 +132,32 @@
 .button:hover {
   transform: translate(-50%, -50%) rotate(-120deg) scale(1.25);
   transition: transform 0.5s;
+}
+
+.reset {
+  position: absolute;
+  top: 3rem;
+  right: 0;
+  text-align: center;
+}
+
+@media (max-width: 600px) {
+  .grid {
+    width: 100%;
+    flex-direction: column;
+  }
+  .card button {
+    font-size: 1.75rem;
+  }
+  .reset {
+    transform: translate(-50%, -50%) scale(0.75);
+    position: absolute;
+    top: 50%;
+    right: -1rem;
+  }
+  .footer {
+    position: relative;
+  }
 }
 
 .bb {
@@ -149,10 +185,21 @@
   color: rgb(29, 53, 87);
 }
 
+@media (prefers-color-scheme: dark) {
+  .emnr {
+    background: linear-gradient(135deg,rgb(29, 53, 87) 85%,rgba(0,0,0,0) 0.1%, rgb(230, 57, 70) 20%);
+    color: white;
+  }
+}
 .vitnemal {
   color: rgb(16, 106, 125);
 }
 
+@media (prefers-color-scheme: dark) {
+  .vitnemal {
+    color: white;
+  }
+}
 .abakus {
   background-color: #E21617;
   color: white;
@@ -206,13 +253,5 @@
 }
 
 .image {
-  height: 1rem;
   margin-top: 0.5rem;
-}
-
-@media (max-width: 600px) {
-  .grid {
-    width: 100%;
-    flex-direction: column;
-  }
 }

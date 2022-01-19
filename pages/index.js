@@ -170,15 +170,53 @@ export default function Home() {
           name="description"
           content="Startsiden for IT-studenter på Gløshaugen"
         />
+        <meta
+          name="theme-color"
+          content="#ffffff"
+          media="(prefers-color-scheme: light)"
+        />
+        <meta
+          name="theme-color"
+          content="#121212"
+          media="(prefers-color-scheme: dark)"
+        />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main
-        className={styles.main}
-        style={darkMode ? { backgroundColor: "#121212" } : {}}
-      >
+      <main className={styles.main}>
+        <div className={styles.grid}>
+          {links.map((metadata, key) =>
+            activeLinks[key] ? (
+              <LinkCard
+                key={key}
+                darkMode={darkMode}
+                {...metadata}
+                onClose={() => closeLink(key)}
+              />
+            ) : (
+              <React.Fragment key={key}></React.Fragment>
+            )
+          )}
+        </div>
+      </main>
+      <footer className={styles.footer}>
+        <a
+          href="https://github.com/Magssch/data-start"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Foreslå endringer på{" "}
+          <span className={styles.logo}>
+            <Image
+              src={"./github.svg"}
+              alt="Github Logo"
+              width={16}
+              height={16}
+            />{" "}
+          </span>
+        </a>
         <button
-          className={styles.button}
+          className={`${styles.button} ${styles.reset}`}
           onClick={(e) => {
             reset();
           }}
@@ -201,45 +239,6 @@ export default function Home() {
             />
           </span>
         </button>
-        <div className={styles.grid}>
-          {links.map((metadata, key) =>
-            activeLinks[key] ? (
-              <LinkCard
-                key={key}
-                darkMode={darkMode}
-                {...metadata}
-                onClose={() => closeLink(key)}
-              />
-            ) : (
-              <React.Fragment key={key}></React.Fragment>
-            )
-          )}
-        </div>
-      </main>
-
-      <footer
-        className={styles.footer}
-        style={
-          darkMode
-            ? { borderTop: "1px solid #363636", backgroundColor: "#888999" }
-            : {}
-        }
-      >
-        <a
-          href="https://github.com/Magssch/data-start"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Foreslå endringer på{" "}
-          <span className={styles.logo}>
-            <Image
-              src={"./github.svg"}
-              alt="Github Logo"
-              width={16}
-              height={16}
-            />{" "}
-          </span>
-        </a>
       </footer>
     </div>
   );
