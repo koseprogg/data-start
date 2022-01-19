@@ -2,6 +2,8 @@ import React from "react";
 import Link from "next/link";
 import styles from "../styles/Home.module.css";
 
+const basePath = process.env.NODE_ENV === "production" ? "/data-start" : "";
+
 const LinkCard = ({
   className = "",
   name,
@@ -22,6 +24,10 @@ const LinkCard = ({
   const content = (
     <div
       onClick={() => (window.location.href = url)}
+      onTouchEnd={(e) => {
+        e.preventDefault();
+        window.location.href = url;
+      }}
       className={`${styles.card} ${className}`}
       style={styleContent}
     >
@@ -38,7 +44,7 @@ const LinkCard = ({
       </button>
     </div>
   );
-  return internal ? <Link href="/work">{content}</Link> : content;
+  return internal ? <Link href={`${basePath}/work`}>{content}</Link> : content;
 };
 
 export default LinkCard;

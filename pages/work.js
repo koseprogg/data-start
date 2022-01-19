@@ -24,10 +24,10 @@ export default function Home() {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <h2>
-        <Link href="/">&#8592; Tilbake</Link>
-      </h2>
       <main className={styles.main}>
+        <h2>
+          <Link href="/">&#8592; Tilbake</Link>
+        </h2>
         <div className={styles.grid}>
           <a
             href="https://bindeleddet.no/jobs"
