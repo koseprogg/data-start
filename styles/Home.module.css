@@ -185,21 +185,27 @@
   color: rgb(29, 53, 87);
 }
 
-@media (prefers-color-scheme: dark) {
-  .emnr {
-    background: linear-gradient(135deg,rgb(29, 53, 87) 85%,rgba(0,0,0,0) 0.1%, rgb(230, 57, 70) 20%);
-    color: white;
-  }
-}
 .vitnemal {
   color: rgb(16, 106, 125);
 }
 
 @media (prefers-color-scheme: dark) {
+
+  .card {
+    box-shadow: none;
+    border: 1px solid white;
+  }
+
+  .emnr {
+    background: linear-gradient(135deg,rgb(29, 53, 87) 85%,rgba(0,0,0,0) 0.1%, rgb(230, 57, 70) 20%);
+    color: white;
+  }
+
   .vitnemal {
     color: white;
   }
 }
+
 .abakus {
   background-color: #E21617;
   color: white;

@@ -9,6 +9,11 @@ body {
 @media (prefers-color-scheme: dark) {
   body {
     background-color: #121212;
+    color: white;
+  }
+  
+  h2 {
+    background-color: white;
   }
 }
 
