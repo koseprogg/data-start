@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import styles from "../styles/Home.module.css";
 
@@ -14,6 +14,8 @@ const LinkCard = ({
   darkMode,
   onClose,
 }) => {
+  const [moved, setMoved] = useState(false);
+  const [touched, setTouched] = useState(false);
   const styleContent = {};
   if (darkMode) {
     styleContent = { boxShadow: "none", border: "1px solid white" };
@@ -24,16 +26,29 @@ const LinkCard = ({
   const content = (
     <div
       onClick={() => (window.location.href = url)}
+      onTouchStart={() => {
+        setMoved(false);
+        setTouched(true);
+      }}
+      onTouchMove={() => setMoved(true)}
       onTouchEnd={(e) => {
         e.preventDefault();
-        window.location.href = url;
+        if (!moved) {
+          window.location.href = url;
+        }
+        setTouched(false);
       }}
-      className={`${styles.card} ${className}`}
+      className={`${styles.card} ${className} ${
+        moved ? styles.cardTouched : ""
+      }`}
       style={styleContent}
     >
       <h2>{name}</h2>
       <p>{description}</p>
       <button
+        onTouchEnd={(e) => {
+          e.stopPropagation();
+        }}
         onClick={(e) => {
           e.stopPropagation();
           onClose();
