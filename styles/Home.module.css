@@ -130,7 +130,7 @@
 }
 
 .button:hover {
-  transform: rotate(-120deg);
+  transform: translate(-50%, -50%) rotate(-120deg);
   transition: transform 0.5s;
 }
 
