@@ -22,17 +22,6 @@
   position: unset;
 }
 
-@media (prefers-color-scheme: dark) {
-  .footer {
-    border-top: 1px solid #ffffff;
-    background-color: #222222;
-    color: white;
-  }
-
-  .footer img {
-    filter: brightness(0) invert(1);
-  }
-}
 .footer a {
   display: flex;
   justify-content: center;
@@ -98,6 +87,7 @@
   min-height: 250px;
   box-shadow: 1px 1px 5px #888888;
   transition: box-shadow 0.3s;
+  transition: transform ease-in-out 0.1s;
   position: relative;
   cursor: pointer;
 }
@@ -130,7 +120,7 @@
 }
 
 .button:hover {
-  transform: translate(-50%, -50%) rotate(-120deg);
+  transform: translate(-50%, -50%) scale(1.25);
   transition: transform 0.5s;
 }
 
@@ -189,22 +179,6 @@
   color: rgb(16, 106, 125);
 }
 
-@media (prefers-color-scheme: dark) {
-  .card, .card:hover {
-    box-shadow: none;
-    border: 1px solid white;
-  }
-
-  .emnr {
-    background: linear-gradient(135deg,rgb(29, 53, 87) 85%,rgba(0,0,0,0) 0.1%, rgb(230, 57, 70) 20%);
-    color: white;
-  }
-
-  .vitnemal {
-    color: white;
-  }
-}
-
 .abakus {
   background-color: #E21617;
   color: white;
@@ -260,4 +234,46 @@
 
 .image {
   margin-top: 0.5rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  .card, .card:hover {
+    box-shadow: none;
+    border: 1px solid white;
+    color: white;
+  }
+
+  .card h2 {
+    color: white;
+  }
+
+  .emnr {
+    background: linear-gradient(135deg,rgb(29, 53, 87) 85%,rgba(0,0,0,0) 0.1%, rgb(230, 57, 70) 20%);
+    color: white;
+  }
+
+  .vitnemal {
+    color: white;
+  }
+
+  .footer {
+    border-top: 1px solid #ffffff;
+    background-color: #222222;
+    color: white;
+  }
+
+  .footer img {
+    filter: brightness(0) invert(1);
+  }
+
+
+  .card:hover,
+  .card:focus,
+  .card:active,
+  .card-touched {
+    box-shadow: 5px 5px 10px #888888;
+    transition: box-shadow 0.3s;
+    transform: scale(1.025);
+    transition: transform 0.1s;
+  }
 }
