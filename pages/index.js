@@ -1,10 +1,11 @@
+
 import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import Image from "../components/Image";
 import LinkCard from "../components/LinkCard";
 
-const links = [
+const originalLinks = [
   {
     url: "https://ntnu.blackboard.com/webapps/portal/execute/tabs/tabAction?tab_tab_group_id=_70_1",
     className: styles.bb,
@@ -124,15 +125,11 @@ const links = [
   },
 ];
 
-function generateDefaultConfig() {
-  const defaultConfig = [];
-  for (let index = 0; index < 15; index++) {
-    defaultConfig.push(true);
-  }
-  return defaultConfig;
-}
+
+
 
 export default function Home() {
+  const [links, setLinks] = useState(originalLinks);
   const [darkMode, setDarkMode] = useState(false);
   const [activeLinks, setActiveLinks] = useState([]);
 
@@ -140,6 +137,23 @@ export default function Home() {
     const activeLinksCopy = [...activeLinks];
     activeLinksCopy[index] = false;
     setActiveLinks(activeLinksCopy);
+  }
+   
+  function generateDefaultConfig() {
+    const defaultConfig = [];
+    for (let index = 0; index < links.length; index++) {
+      defaultConfig.push(true);
+    }
+    return defaultConfig;
+  }
+
+  function addLink(title, info, link) {
+    originalLinks.push({
+      url: link,
+      name: title,
+      description: info,
+    });
+    setLinks(originalLinks);
   }
 
   function reset() {
@@ -161,6 +175,7 @@ export default function Home() {
     localStorage.setItem("activeLinks", JSON.stringify(activeLinks));
     setDarkMode(window.matchMedia("(prefers-color-scheme: dark)").matches);
   }, [activeLinks]);
+
 
   return (
     <div className={styles.container}>
@@ -193,11 +208,46 @@ export default function Home() {
                 {...metadata}
                 onClose={() => closeLink(key)}
               />
+              
             ) : (
               <React.Fragment key={key}></React.Fragment>
             )
           )}
         </div>
+        <button id="addButton" className = {`${styles.card} ${styles.addButton}`}
+        onClick={() => {
+          document.getElementById("addButton").style.display= "none";
+          document.getElementById("form").style.display = "block";
+        }}
+        >
+          <h3>Legg til link</h3>
+        </button>
+          <div id="form" className={`${styles.card} ${styles.form}`}>
+            <p className={styles.title}>Title:</p>
+            <input id="title"></input>
+            <p className={styles.title}>Info:</p>
+            <input id="info"></input>
+            <p className={styles.title}>Link:</p>
+            <input id="link"></input>
+            <button
+              onClick={() => {
+                document.getElementById("form").style.display = "none";
+                document.getElementById("addButton").style.display = "block";
+                console.log(document.getElementById("title").value);
+                addLink(
+                  document.getElementById("title").value,
+                  document.getElementById("info").value,
+                  document.getElementById("link").value
+                );
+                reset();
+              }}
+              className={styles.makeNewLink}
+            >
+              ADD LINK
+          </button>
+        </div>
+      
+        
       </main>
       <footer className={styles.footer}>
         <a
