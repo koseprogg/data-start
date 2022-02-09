@@ -13,14 +13,20 @@ const api = {
 };
 
 const TestAPI = () => {
+  function fetchAndParse(url, callback) {
+    return fetch(url).then(async (response) => {
+      const result = await response.json();
+      return callback(result);
+    });
+  }
+
+  function parseOnlineJobs(payload) {}
+
   const [Jobs, setJobs] = useState({});
   useEffect(() => {
-    fetch("https://lego.abakus.no/api/v1/joblistings/").then(
-      async (response) => {
-        const result = await response.json();
-        setJobs(result);
-      }
-    );
+    const jobList = [];
+    // ....
+    setJobs(jobList);
   }, []);
   return <div>{JSON.stringify(Jobs)}</div>;
 };
