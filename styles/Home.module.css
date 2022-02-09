@@ -84,7 +84,7 @@
   border-radius: 10px;
   transition: color 0.15s ease, border-color 0.15s ease;
   width: 300px;
-  min-height: 250px;
+  height: 250px;
   box-shadow: 1px 1px 5px #888888;
   transition: box-shadow 0.3s;
   transition: transform ease-in-out 0.1s;
@@ -111,26 +111,58 @@
 }
 
 .addButton{
-  text-align: center; 
-  min-width: 300px;
-  min-height: 10px;
+  width: 300px;
+  height: 80px;
   background-color: transparent;
+  display: flex;
 }
 
-.form{
+#pluss {
+  position: absolute;
+  left: 25%;
+  align-self: center;
+  
+}
+
+.addButton h3{
+  position: relative;
+  margin: auto;
+}
+
+.newLinkForm{
   border-radius: 5px;
   background-color: transparent;
   padding: auto;
-  display: none;
+  text-size-adjust: 1;
 }
 
-.title {
-  color: white;
-  font-size: 2 rem !important;
+.newLinkForm h3{
+  font-size: 20px;
+  margin: 0;
 }
 
-.makeNewLink{
-  color: white;
+.newLinkForm input{
+  background-color: #e3e3e4;
+  border-radius: 5px;
+  border-width: 0.25px;
+  color: black;
+  margin-top: 7px;
+  margin-bottom: 7px;
+}
+
+
+
+#newLinkConfirm{
+  display: unset;
+  text-align: center; 
+  border: 1px solid black;
+  border-color: black;
+  background-color: white;
+  border-radius: 5px;
+  margin: 7px;
+  position: absolute;
+  bottom: 0;
+  left: 50%; 
 }
 
 .card:hover button {
@@ -260,6 +292,17 @@
 }
 
 @media (prefers-color-scheme: dark) {
+  .newLinkForm input{
+    background-color: #2f3338;
+    color: white;
+
+  }
+  
+  #newLinkConfirm{
+    color: black;
+    background-color: white;
+  }
+
   .card, .card:hover {
     box-shadow: none;
     border: 1px solid white;
@@ -267,6 +310,9 @@
   }
 
   .card h2 {
+    color: white;
+  }
+  .card h3 {
     color: white;
   }
 
