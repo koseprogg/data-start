@@ -34,12 +34,28 @@ const TestAPI = () => {
       workplace: listing.workplaces.map((workplace) => workplace.town).toString(),
     }));
   }
+  function parseTihldeJobs(payload) {
+    let jobTypeMap = { FULL_TIME: "full_time", PART_TIME: "part_time" };
+    return payload.results.map((listing) => ({
+      deadline: listing.deadline,
+      fromYear: listing.class_start,
+      toYear: listing.class_end,
+      jobType: jobTypeMap[listing.jobType],
+      title: listing.title,
+      company: listing.company,
+      url: "https://tihlde.org/karriere/" + listing.id + "/",
+      workplace: listing.location,
+    }));
+  }
   const [Jobs, setJobs] = useState([]);
   useEffect(() => {
-    setJobs([])
-    fetchAndParse("https://lego.abakus.no/api/v1/joblistings/", parseAbakusJobs).then(listings => {
-      setJobs([... Jobs, ... listings])
-    })
+    setJobs([]);
+    fetchAndParse("https://lego.abakus.no/api/v1/joblistings/", parseAbakusJobs).then((listings) => {
+      setJobs([...Jobs, ...listings]);
+    });
+    fetchAndParse("https://api.tihlde.org/jobposts/", parseTihldeJobs).then((listings) => {
+      setJobs([...Jobs, ...listings]);
+    });
   }, []);
   return <div>{JSON.stringify(Jobs)}</div>;
 };
