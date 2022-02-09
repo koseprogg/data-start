@@ -51,23 +51,39 @@ const TestAPI = () => {
   }
   const [Jobs, setJobs] = useState([]);
   useEffect(() => {
-    const fetchAbakus = fetchAndParse(
-      "https://lego.abakus.no/api/v1/joblistings/",
-      parseAbakusJobs
-    );
-    const fetchOnline = fetchAndParse(
-      "https://old.online.ntnu.no/api/v1/career/",
-      parseOnlineJobs
-    );
-    const fetchTihlde = fetchAndParse(
-      "https://api.tihlde.org/jobposts/",
-      parseTihldeJobs
-    );
+    const cachedJobs = localStorage.getItem("jobListings");
+    const jobListingCacheDate = localStorage.getItem("jobListingCacheDate");
+    if (
+      !!cachedJobs &&
+      cachedJobs.length > 0 &&
+      parseInt(jobListingCacheDate) > Date.now() - 3600 * 24
+    ) {
+      setJobs(JSON.parse(localStorage.getItem("jobListings")));
+    } else {
+      localStorage.removeItem("jobListings");
 
-    Promise.all([fetchAbakus, fetchOnline, fetchTihlde]).then((arrays) => {
-      setJobs(arrays.flat());
-    });
+      const fetchAbakus = fetchAndParse(
+        "https://lego.abakus.no/api/v1/joblistings/",
+        parseAbakusJobs
+      );
+      const fetchOnline = fetchAndParse(
+        "https://old.online.ntnu.no/api/v1/career/",
+        parseOnlineJobs
+      );
+      const fetchTihlde = fetchAndParse(
+        "https://api.tihlde.org/jobposts/",
+        parseTihldeJobs
+      );
+
+      Promise.all([fetchAbakus, fetchOnline, fetchTihlde]).then((arrays) => {
+        const jobsArray = arrays.flat();
+        setJobs(jobsArray);
+        localStorage.setItem("jobListings", JSON.stringify(jobsArray));
+        localStorage.setItem("jobListingCacheDate", Date.now());
+      });
+    }
   }, []);
+
   return <div>{JSON.stringify(Jobs)}</div>;
 };
 
