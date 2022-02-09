@@ -240,7 +240,7 @@ export default function Home() {
           }}
           >
             <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></link>
-            <span id={styles.pluss} class="material-icons">add</span>
+            <span id={styles.pluss} className="material-icons">add</span>
             <h3>Legg til link</h3>
           </button>
           )}
