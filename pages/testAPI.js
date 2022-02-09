@@ -13,7 +13,7 @@ const api = {
 };
 
 const TestAPI = () => {
-  function fetchAndParse(url, callback) {
+  async function fetchAndParse(url, callback) {
     return fetch(url).then(async (response) => {
       const result = await response.json();
       return callback(result);
@@ -22,11 +22,24 @@ const TestAPI = () => {
 
   function parseOnlineJobs(payload) {}
 
-  const [Jobs, setJobs] = useState({});
+  function parseAbakusJobs(payload) {
+    return payload.results.map((listing) => ({
+      deadline: listing.deadline,
+      fromYear: listing.fromYear,
+      toYear: listing.toYear,
+      jobType: listing.jobType,
+      title: listing.title,
+      companyName: listing.company.name,
+      url: "https://abakus.no/joblistings/" + listing.id + "/",
+      workplace: listing.workplaces.map((workplace) => workplace.town).toString(),
+    }));
+  }
+  const [Jobs, setJobs] = useState([]);
   useEffect(() => {
-    const jobList = [];
-    // ....
-    setJobs(jobList);
+    setJobs([])
+    fetchAndParse("https://lego.abakus.no/api/v1/joblistings/", parseAbakusJobs).then(listings => {
+      setJobs([... Jobs, ... listings])
+    })
   }, []);
   return <div>{JSON.stringify(Jobs)}</div>;
 };
