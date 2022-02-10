@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from "react";
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
@@ -125,9 +124,6 @@ const originalLinks = [
   },
 ];
 
-
-
-
 export default function Home() {
   const [links, setLinks] = useState(originalLinks);
   const [darkMode, setDarkMode] = useState(false);
@@ -138,7 +134,7 @@ export default function Home() {
     activeLinksCopy[index] = false;
     setActiveLinks(activeLinksCopy);
   }
-   
+
   function generateDefaultConfig() {
     const defaultConfig = [];
     for (let index = 0; index < links.length; index++) {
@@ -176,22 +172,20 @@ export default function Home() {
     setDarkMode(window.matchMedia("(prefers-color-scheme: dark)").matches);
   }, [activeLinks]);
 
-  const ref = useRef()
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const ref = useRef();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
-    const checkIfClickedOutside = e => {
- 
-       if (isMenuOpen && ref.current && !ref.current.contains(e.target)) {
-         setIsMenuOpen(false)
-       }
-     }  
-     document.addEventListener("mousedown", checkIfClickedOutside)  
-     return () => {
-       
-       document.removeEventListener("mousedown", checkIfClickedOutside)
-     }
-   }, [isMenuOpen])
+    const checkIfClickedOutside = (e) => {
+      if (isMenuOpen && ref.current && !ref.current.contains(e.target)) {
+        setIsMenuOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", checkIfClickedOutside);
+    return () => {
+      document.removeEventListener("mousedown", checkIfClickedOutside);
+    };
+  }, [isMenuOpen]);
 
   return (
     <div className={styles.container}>
@@ -224,7 +218,6 @@ export default function Home() {
                 {...metadata}
                 onClose={() => closeLink(key)}
               />
-              
             ) : (
               <React.Fragment key={key}></React.Fragment>
             )
@@ -232,49 +225,53 @@ export default function Home() {
         </div>
         <div className="Wrapper" ref={ref}>
           {!isMenuOpen && (
-          <button id="addButton" className = {`${styles.card} ${styles.addButton}`}
-          onClick={() => {
-            setIsMenuOpen(oldState => !oldState)
-            
-            
-          }}
-          >
-            <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></link>
-            <span id={styles.pluss} className="material-icons">add</span>
-            <h3>Legg til link</h3>
-          </button>
+            <button
+              id="addButton"
+              className={`${styles.card} ${styles.addButton}`}
+              onClick={() => {
+                setIsMenuOpen((oldState) => !oldState);
+              }}
+            >
+              <link
+                href="https://fonts.googleapis.com/icon?family=Material+Icons"
+                rel="stylesheet"
+              ></link>
+              <span id={styles.pluss} className="material-icons">
+                add
+              </span>
+              <h3>Legg til link</h3>
+            </button>
           )}
           {isMenuOpen && (
-          <div id="form" className={`${styles.card} ${styles.newLinkForm}`}>
-            <h3 >Title:</h3>
-            <input id="title" size="35"></input>
-            <h3 >Info:</h3>
-            <input id="info" size="35"></input>
-            <h3 >Link:</h3>
-            <input id="link" size="35"></input>
-            <button
-              onClick={() => {
-                setIsMenuOpen(oldState => !oldState)
-                console.log(document.getElementById("title").value);
-                addLink(
-                  document.getElementById("title").value,
-                  document.getElementById("info").value,
-                  document.getElementById("link").value
-                );
-                reset();
-              }}
-              id = {styles.newLinkConfirm}
-            >
-              ADD LINK
-            </button>
-          </div>
-          )} 
+            <div id="form" className={`${styles.card} ${styles.newLinkForm}`}>
+              <h3>Title:</h3>
+              <input id="title" size="35"></input>
+              <h3>Info:</h3>
+              <input id="info" size="35"></input>
+              <h3>Link:</h3>
+              <input id="link" size="35"></input>
+              <button
+                onClick={() => {
+                  setIsMenuOpen((oldState) => !oldState);
+                  console.log(document.getElementById("title").value);
+                  addLink(
+                    document.getElementById("title").value,
+                    document.getElementById("info").value,
+                    document.getElementById("link").value
+                  );
+                  reset();
+                }}
+                id={styles.newLinkConfirm}
+              >
+                ADD LINK
+              </button>
+            </div>
+          )}
         </div>
-           
-    </main>
+      </main>
       <footer className={styles.footer}>
         <a
-          href="https://github.com/Magssch/data-start"
+          href="https://github.com/koseprogg/data-start"
           target="_blank"
           rel="noopener noreferrer"
         >
