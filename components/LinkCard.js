@@ -61,7 +61,7 @@ const LinkCard = ({
       </button>
     </div>
   );
-  return internal ? <Link href={`/work`}>{content}</Link> : content;
+  return internal ? <Link href={"/work"}>{content}</Link> : content;
 };
 
 export default LinkCard;
