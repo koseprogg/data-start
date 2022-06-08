@@ -1,3 +1,4 @@
+import { ReactSortable } from "react-sortablejs";
 import React, { useState, useEffect, useRef } from "react";
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
@@ -210,7 +211,7 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <div className={styles.grid}>
+        <ReactSortable list={links} setList={setLinks} className={styles.grid}>
           {links.map((metadata, key) => (
             <LinkCard
               key={key}
@@ -220,7 +221,7 @@ export default function Home() {
               onClose={() => removeLink(key)}
             />
           ))}
-        </div>
+        </ReactSortable>
         <div className="Wrapper" ref={ref}>
           {!isMenuOpen && (
             <button
