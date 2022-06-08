@@ -71,7 +71,6 @@
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
-  max-width: 1000px;
 }
 
 .card {
@@ -92,7 +91,8 @@
   cursor: pointer;
 }
 
-.card button, .button {
+.card button,
+.button {
   background: transparent;
   border: none;
   font-size: 1.2rem;
@@ -110,7 +110,7 @@
   transition: transform 0.1s;
 }
 
-.addButton{
+.addButton {
   width: 300px;
   height: 80px;
   background-color: transparent;
@@ -121,27 +121,26 @@
   position: absolute;
   left: 25%;
   align-self: center;
-  
 }
 
-.addButton h3{
+.addButton h3 {
   position: relative;
   margin: auto;
 }
 
-.newLinkForm{
+.newLinkForm {
   border-radius: 5px;
   background-color: transparent;
   padding: auto;
   text-size-adjust: 1;
 }
 
-.newLinkForm h3{
+.newLinkForm h3 {
   font-size: 20px;
   margin: 0;
 }
 
-.newLinkForm input{
+.newLinkForm input {
   background-color: #e3e3e4;
   border-radius: 5px;
   border-width: 0.25px;
@@ -150,11 +149,9 @@
   margin-bottom: 7px;
 }
 
-
-
-#newLinkConfirm{
+#newLinkConfirm {
   display: unset;
-  text-align: center; 
+  text-align: center;
   border: 1px solid black;
   border-color: black;
   background-color: white;
@@ -162,7 +159,7 @@
   margin: 7px;
   position: absolute;
   bottom: 0;
-  left: 50%; 
+  left: 50%;
 }
 
 .card:hover button {
@@ -226,7 +223,12 @@
 }
 
 .emnr {
-  background: linear-gradient(135deg,rgb(241, 250, 238) 85%,rgba(0,0,0,0) 0.1%, rgb(230, 57, 70) 20%);
+  background: linear-gradient(
+    135deg,
+    rgb(241, 250, 238) 85%,
+    rgba(0, 0, 0, 0) 0.1%,
+    rgb(230, 57, 70) 20%
+  );
   color: rgb(29, 53, 87);
 }
 
@@ -235,7 +237,7 @@
 }
 
 .abakus {
-  background-color: #E21617;
+  background-color: #e21617;
   color: white;
 }
 
@@ -292,18 +294,18 @@
 }
 
 @media (prefers-color-scheme: dark) {
-  .newLinkForm input{
+  .newLinkForm input {
     background-color: #2f3338;
     color: white;
-
   }
-  
-  #newLinkConfirm{
+
+  #newLinkConfirm {
     color: black;
     background-color: white;
   }
 
-  .card, .card:hover {
+  .card,
+  .card:hover {
     box-shadow: none;
     border: 1px solid white;
     color: white;
@@ -317,7 +319,12 @@
   }
 
   .emnr {
-    background: linear-gradient(135deg,rgb(29, 53, 87) 85%,rgba(0,0,0,0) 0.1%, rgb(230, 57, 70) 20%);
+    background: linear-gradient(
+      135deg,
+      rgb(29, 53, 87) 85%,
+      rgba(0, 0, 0, 0) 0.1%,
+      rgb(230, 57, 70) 20%
+    );
     color: white;
   }
 
@@ -334,7 +341,6 @@
   .footer img {
     filter: brightness(0) invert(1);
   }
-
 
   .card:hover,
   .card:focus,
