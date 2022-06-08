@@ -4,6 +4,30 @@ import styles from "../styles/Home.module.css";
 import Image from "../components/Image";
 import LinkCard from "../components/LinkCard";
 
+// Separate JSX elements from the link data that is parsed through JSON.stringify
+const customNames = {
+  abakus: (
+    <span className={styles.image}>
+      <Image src={"./abakus.png"} alt="Abakus Logo" height={25} width={110} />
+    </span>
+  ),
+  emnr: (
+    <>
+      EMN<span style={{ color: "rgb(230, 57, 70)" }}>R</span>
+    </>
+  ),
+  online: (
+    <span className={styles.image}>
+      <Image src={"./online.svg"} alt="Online Logo" height={25} width={100} />
+    </span>
+  ),
+  tihlde: (
+    <span className={styles.image}>
+      <Image src={"./tihlde.png"} alt="Tihlde Logo" height={25} width={140} />
+    </span>
+  ),
+};
+
 const originalLinks = [
   {
     url: "https://ntnu.blackboard.com/webapps/portal/execute/tabs/tabAction?tab_tab_group_id=_70_1",
@@ -57,11 +81,7 @@ const originalLinks = [
   {
     url: "https://emnr.no",
     className: styles.emnr,
-    name: (
-      <>
-        EMN<span style={{ color: "rgb(230, 57, 70)" }}>R</span>
-      </>
-    ),
+    name: "emnr",
     description: "Se verifiserte vurderinger av emner fra medstudenter.",
     closeColor: "white",
   },
@@ -92,85 +112,66 @@ const originalLinks = [
   {
     url: "https://abakus.no",
     className: styles.abakus,
-    name: (
-      <span className={styles.image}>
-        <Image src={"./abakus.png"} alt="Abakus Logo" height={25} width={110} />
-      </span>
-    ),
+    name: "abakus",
     description: "Nettsiden til linjeforeningen Abakus.",
     closeColor: "white",
   },
   {
     url: "https://online.ntnu.no",
     className: styles.online,
-    name: (
-      <span className={styles.image}>
-        <Image src={"./online.svg"} alt="Online Logo" height={25} width={100} />
-      </span>
-    ),
+    name: "online",
     description: "Nettsiden til linjeforeningen Online.",
     closeColor: "white",
   },
   {
     url: "https://tihlde.org",
     className: styles.tihlde,
-    name: (
-      <span className={styles.image}>
-        <Image src={"./tihlde.png"} alt="Tihlde Logo" height={25} width={140} />
-      </span>
-    ),
+    name: "tihlde",
     description: "Nettsiden til linjeforeningen Tihlde.",
     closeColor: "white",
   },
 ];
 
 export default function Home() {
-  const [links, setLinks] = useState(originalLinks);
+  const [links, setLinks] = useState([]);
   const [darkMode, setDarkMode] = useState(false);
-  const [activeLinks, setActiveLinks] = useState([]);
 
-  function closeLink(index) {
-    const activeLinksCopy = [...activeLinks];
-    activeLinksCopy[index] = false;
-    setActiveLinks(activeLinksCopy);
-  }
-
-  function generateDefaultConfig() {
-    const defaultConfig = [];
-    for (let index = 0; index < links.length; index++) {
-      defaultConfig.push(true);
-    }
-    return defaultConfig;
+  function removeLink(index) {
+    const updatedLinks = [...links];
+    updatedLinks.splice(index, 1);
+    setLinks(updatedLinks);
   }
 
   function addLink(title, info, link) {
-    originalLinks.push({
-      url: link,
-      name: title,
-      description: info,
-    });
-    setLinks(originalLinks);
+    setLinks([
+      ...links,
+      {
+        url: link,
+        name: title,
+        description: info,
+      },
+    ]);
   }
 
   function reset() {
-    setActiveLinks(generateDefaultConfig());
+    setLinks(originalLinks);
   }
 
   useEffect(() => {
     if (
-      !!localStorage.getItem("activeLinks") &&
-      JSON.parse(localStorage.getItem("activeLinks")).length >= 15
+      !!localStorage.getItem("links") &&
+      JSON.parse(localStorage.getItem("links")).length >= 1
     ) {
-      setActiveLinks(JSON.parse(localStorage.getItem("activeLinks")));
+      setLinks(JSON.parse(localStorage.getItem("links")));
     } else {
       reset();
     }
   }, []);
 
   useEffect(() => {
-    localStorage.setItem("activeLinks", JSON.stringify(activeLinks));
+    localStorage.setItem("links", JSON.stringify(links));
     setDarkMode(window.matchMedia("(prefers-color-scheme: dark)").matches);
-  }, [activeLinks]);
+  }, [links]);
 
   const ref = useRef();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -210,18 +211,15 @@ export default function Home() {
 
       <main className={styles.main}>
         <div className={styles.grid}>
-          {links.map((metadata, key) =>
-            activeLinks[key] ? (
-              <LinkCard
-                key={key}
-                darkMode={darkMode}
-                {...metadata}
-                onClose={() => closeLink(key)}
-              />
-            ) : (
-              <React.Fragment key={key}></React.Fragment>
-            )
-          )}
+          {links.map((metadata, key) => (
+            <LinkCard
+              key={key}
+              darkMode={darkMode}
+              {...metadata}
+              name={customNames[metadata.name] ?? metadata.name}
+              onClose={() => removeLink(key)}
+            />
+          ))}
         </div>
         <div className="Wrapper" ref={ref}>
           {!isMenuOpen && (
