@@ -12,7 +12,9 @@
     "next": "^12.1.6",
     "next-optimized-images": "^2.6.2",
     "react": "^18.1.0",
-    "react-dom": "^18.1.0"
+    "react-dom": "^18.1.0",
+    "react-sortablejs": "^6.1.4",
+    "sortablejs": "^1.15.0"
   },
   "devDependencies": {
     "eslint": "^8.17.0",
